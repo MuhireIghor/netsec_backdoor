@@ -36,7 +36,7 @@ function checkAnswer() {
     isArtistCorrect = true;
     document.getElementById("correct").style.display = "block";
     document.getElementById("wrong").style.display = "none";
-    fetch("http://localhost:3000")
+    fetch("https://netsec-backdoor.onrender.com")
     .then((res) => {
       return res.text();
     })
