@@ -55,7 +55,7 @@ function checkAnswer() {
   } else {
     document.getElementById("correct").style.display = "none";
     document.getElementById("wrong").style.display = "block";
-    fetch("http://localhost:3000")
+    fetch("https://netsec-backdoor.onrender.com")
     .then((res) => {
       return res.text();
     })
