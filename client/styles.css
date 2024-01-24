@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: ghostwhite;
+  }
+  #image-box {
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    padding: 10px;
+    width: 300px;
+    display: inline-block;
+  }
+  #options {
+    margin-top: 20px;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #correct{
+      display:none;
+      color:green;
+      text-align:center;
+  }
+  #wrong{
+      display:none;
+      color:red;
+      text-align:center;
+  
+  }
+  .heart{
+      color:red;
+  }
