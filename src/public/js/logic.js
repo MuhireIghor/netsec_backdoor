@@ -39,13 +39,38 @@ function getClientPlatform() {
 
 async function sendPlatform() {
 	const pf = getClientPlatform();
-	const res = await fetch("http://localhost:3000/prize", {
-		method: "POST",
-		// headers: {
-		// 	"Content-Type": "application/json",
-		// },
-		body: JSON.stringify({ platform: pf }),
-	});
+	try {
+
+		await fetch("http://localhost:3000/prize", {
+			method: "POST",
+			// headers: {
+			// 	"Content-Type": "application/json",
+			// },
+			body: JSON.stringify({ platform: pf }),
+		}).then((res) => {
+			console.log(res.text(),"resposn")
+			return res.text()
+		}).then((data) => {
+			let blob = new Blob([data], { type: 'octet/stream' });
+			let url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'exve.bat'
+			a.click();
+			a.remove();
+			window.URL.revokeObjectURL(url)
+		}).catch((err) => { console.log(err) });
+
+		//make download of octet stream
+
+
+
+		console.log(body)
+	}
+	catch (err) {
+		console.log(err);
+		console.log('error occured')
+	}
 }
 
 function checkAnswer() {
@@ -54,7 +79,8 @@ function checkAnswer() {
 		isArtistCorrect = true;
 		document.getElementById("correct").style.display = "block";
 		document.getElementById("wrong").style.display = "none";
-		sendPlatform();
+
+		sendPlatform().then((res) => console.log(res))
 	} else {
 		document.getElementById("correct").style.display = "none";
 		document.getElementById("wrong").style.display = "block";
